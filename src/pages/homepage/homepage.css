@@ -1,0 +1,47 @@
+.homepage-parent .backgroundimage{
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: -1;
+    
+}
+
+.homepage-items{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.logo-img{
+    width: 50%;
+    padding-top: 10rem;
+}
+
+.homepage-tag{
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.homepage-cta{
+    color: white;
+    background-color: rgba(1, 1, 1, 0);
+    border: solid white 1px;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    
+}
+
+.homepage-cta:hover{
+    transition: color 0.6s;
+    transition: background-color 0.6s;
+    cursor: pointer;
+    color: black;
+    background-color: white;
+}
