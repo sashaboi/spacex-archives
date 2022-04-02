@@ -9,6 +9,7 @@ import Watchhistory from './pages/watchhistory/Watchhistory'
 import Watchlater from './pages/watchlater/Watchlater'
 import Login from './pages/auth/login/Login'
 import Signup from './pages/auth/signup/Signup'
+import Mockman from "mockman-js";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/watchlater" element={<Watchlater />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/mockman" element={<Mockman />} />
         
       </Routes>
     </div>
