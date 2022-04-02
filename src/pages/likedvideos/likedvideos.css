@@ -1,0 +1,14 @@
+.likes-title-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    text-transform: uppercase;
+}
+.liked-vids-section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}

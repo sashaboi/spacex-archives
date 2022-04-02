@@ -4,46 +4,35 @@
  * */
 
 export const videos = [
-  {
-    _id: "Wo5dMEP_BbI",
-    title: "Awesome Video about Coding",
+  { 
+    
+    _id: "sX1Y2JMK6g8",
+    title: "Falcon Heavy",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
     creator: "Soham Shah",
+    category:"Falcon Heavy"
   },
-  {
-    _id: "F_Riqjdh2oM",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
-    creator: "Sentdex",
+  { 
+    _id: "Z4TXCZG_NEY",
+    title: "Falcon 9",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
-  },
-  {
-    _id: "F_Riqjdh2oM",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
-    creator: "Sentdex",
+    creator: "Soham Shah",
+    category:"Falcon 9"
+  },{
+    _id: "Cf_-g3UWQ04",
+    title: "Dragon",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
-  },
-  {
-    _id: "F_Riqjdh2oM",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
-    creator: "Sentdex",
+    creator: "Soham Shah",
+    category:"Dragon"
+  },{
+    _id: "z9eoubnO-pE",
+    title: "Starship Animation",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
-  },
-  {
-    _id: "F_Riqjdh2oM",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
-    creator: "Sentdex",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
-  },
-  {
-    _id: "F_Riqjdh2oM",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
-    creator: "Sentdex",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
-  },
+    creator: "Soham Shah",
+    category:"Starship"
+  }
 ];

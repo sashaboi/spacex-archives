@@ -4,17 +4,17 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
-import {LikeProvider} from './context/LikesContext'
+import {LikeProvider} from './context/LikesContext';
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <LikeProvider/>
+    <LikeProvider>
       <Router>
         <App />
       </Router>
-    <LikeProvider/>
+      </LikeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

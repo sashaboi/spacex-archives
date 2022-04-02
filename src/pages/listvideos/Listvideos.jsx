@@ -1,23 +1,29 @@
 import React from 'react'
 import axios from 'axios'
-import { useEffect ,useState } from 'react';
+import { useEffect  } from 'react';
+import { Link } from "react-router-dom";
+
 
 
 import VideoCard from '../../components/video-card/VideoCard';
 import Navbar from '../../components/navbar/Navbar';
 import './listvideos.css'
+import { useLike } from '../../context/LikesContext';
 const Listvideos = () => {
-const [localvideos , setlocalvideos] = useState([])
+
+const { likedvids ,setlocalvideos, state,dispatch} = useLike();
   useEffect(()=>{
     console.log("useeffect running");
     axios.get('/api/videos')
     .then((response)=>{
       setlocalvideos(response.data.videos);
+      dispatch({type:"setvids",payload:response.data.videos})
     },
     (error)=>{
       console.log(error); 
     })
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return (
@@ -34,11 +40,12 @@ const [localvideos , setlocalvideos] = useState([])
             </div>
             <div className="hr-div-short"></div>
             <div className="menu-item-container">
-              <div className="menu-list-btn">Playlist</div>
-              <div className="menu-list-btn">Watch Later</div>
-              <div className="menu-list-btn">Liked Videos</div>
-              <div className="menu-list-btn">History</div>
-              <div className="menu-list-btn">Categories</div>
+              <Link to="/listvideos"><div className="menu-list-btn">Browse videos</div></Link>
+              <Link to="/playlists"><div className="menu-list-btn">Playlist</div></Link>
+              <Link to="/watchlater"><div className="menu-list-btn">Watch Later</div></Link>
+              <Link to="/likedvideos"><div className="menu-list-btn">Liked Videos</div></Link>
+              <Link to="/watchhistory"><div className="menu-list-btn">History</div></Link>
+              
             </div>
             
         
@@ -47,9 +54,8 @@ const [localvideos , setlocalvideos] = useState([])
             <div className='grid-title'>VIDEOS</div>
             <div className="hr-div-long"></div>
             <div className="video-card-container">
-              {localvideos.map((vid)=><VideoCard id={vid._id} vid = {vid}/>)}
+              {state.map((vid)=><VideoCard key={vid._id} vid = {vid} likedvids ={likedvids}/>)}
             </div>
-  
           </div>
         </div>
       </div>
