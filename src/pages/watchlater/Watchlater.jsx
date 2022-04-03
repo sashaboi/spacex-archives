@@ -16,7 +16,7 @@ const Watchlater = () => {
       <Navbar pagetype="not-home"/>
       <div className="likes-title-section">
       <div className='grid-title'>
-              Liked Videos
+              Watch Later 
       </div>
             <div className="hr-div-long"></div>
       </div>
