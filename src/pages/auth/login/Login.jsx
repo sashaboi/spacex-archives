@@ -1,10 +1,34 @@
 import React from 'react'
-
-
+import axios from 'axios'
+import {useState} from 'react'
+import { useNavigate  } from 'react-router-dom'
 import './login.css'
 import Navbar from '../../../components/navbar/Navbar'
 
 const Login = () => {
+  let navigate = useNavigate();
+  const [email , setemail ] = useState("adarshbalika@gmail.com")
+  const [password , setpassword ] = useState("adarshBalika123")
+  const [disabled , setdisabled] = useState(false)
+
+  const loginHandler = () =>{
+    setdisabled(true)
+    const bodydata = {
+      "email":email,
+      "password":password
+      
+    } 
+
+    axios.post('/api/auth/login',bodydata)
+    .then((response)=>{
+      localStorage.setItem('token',response.data.encodedToken)
+      console.log('login successfully');
+      navigate('/Listvideos')
+    },
+    (error)=>{
+      console.log('error from login page');
+    })
+  }
   return (
     <div >
       <Navbar pagetype="not-home"/>
@@ -19,15 +43,15 @@ const Login = () => {
           <div className="login-inputs-section ">
             <div className="input-auth">
               Email
-              <input type="email" name="" id="email" placeholder='adarshbalika@gmail.com' />
+              <input onChange={(e)=>setemail(e.target.value)} type="email" name="" id="email" placeholder='adarshbalika@gmail.com' />
             </div>
             <div className="input-auth">
               Password
-              <input type="password" name="" id="password" placeholder='adarshbalika' />
+              <input onChange={(e)=>setpassword(e.target.value)} type="password" name="" id="password" placeholder='adarshbalika' />
             </div>
             <div className="auth-btn-section">
-              <button className='auth-btn'>Login</button>
-              <button className='auth-btn'>default</button>
+              <button disabled={disabled} onClick={()=>loginHandler()} className='auth-btn'>Login</button>
+              <button disabled={disabled} onClick={()=>loginHandler()} className='auth-btn'>default</button>
             </div>
             
           </div>

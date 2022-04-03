@@ -1,7 +1,37 @@
 import React from 'react'
+import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate  } from 'react-router-dom'
+
+
 import Navbar from '../../../components/navbar/Navbar'
 
 const Signup = () => {
+  let navigate = useNavigate();
+  const [email , setemail ] = useState("onkarcool123@gmail.com")
+  const [password , setpassword ] = useState("OnkarDeshpande")
+  const [disabled , setdisabled] = useState(false)
+
+  const SignupHandler = () =>{
+    setdisabled(true)
+    const bodydata = {
+      "email":email,
+      "password":password,
+      "firstname":"Onkar",
+      "lastname":"Deshpande"
+    } 
+
+    axios.post('/api/auth/signup',bodydata)
+    .then((response)=>{
+      localStorage.setItem('token',response.data.encodedToken)
+      console.log('signed up successfully');
+      navigate('/Listvideos')
+    },
+    (error)=>{
+      console.log('error from signup');
+    })
+  }
+
   return (
     <div>
       <Navbar pagetype="not-home"/>
@@ -16,15 +46,15 @@ const Signup = () => {
         <div className="login-inputs-section ">
           <div className="input-auth">
             Email
-            <input type="email" name="" id="email" placeholder='adarshbalika@gmail.com' />
+            <input onChange={(e)=>setemail(e.target.value)} type="email" name="" id="email" placeholder='adarshbalika@gmail.com' />
           </div>
           <div className="input-auth">
             Password
-            <input type="password" name="" id="password" placeholder='adarshbalika' />
+            <input onChange={(e)=>setpassword(e.target.value)} type="password" name="" id="password" placeholder='adarshbalika' />
           </div>
           <div className="auth-btn-section">
-            <button className='auth-btn'>Signup</button>
-            <button className='auth-btn'>default</button>
+            <button disabled={disabled} onClick={()=>SignupHandler()} className='auth-btn'>Signup</button>
+            <button disabled={disabled} onClick={()=>SignupHandler()} className='auth-btn'>default</button>
           </div>
           
         </div>
