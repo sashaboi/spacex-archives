@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import { useNavigate  } from 'react-router-dom'
+
 
 import { AiFillLike,AiOutlineLike,AiFillCheckCircle } from 'react-icons/ai';
 import {MdOutlineWatchLater} from 'react-icons/md';
@@ -10,6 +12,7 @@ import { useState } from 'react';
 
 import './videocard.css'
 const VideoCard = ({vid,likedvids}) => {
+  let navigate = useNavigate();
   const [disabled , setdisabled]=useState(false)
   
   const {dispatch,setlikedvids} = useLike();
@@ -50,6 +53,7 @@ const VideoCard = ({vid,likedvids}) => {
       (error)=>{
         console.log(error); 
         setdisabled(false)
+        navigate('/login')
       })
 
     }else{
@@ -62,6 +66,7 @@ const VideoCard = ({vid,likedvids}) => {
       (error)=>{
         setdisabled(false)
         console.log(error); 
+        navigate('/login')
       })
     }
     
@@ -81,11 +86,13 @@ const VideoCard = ({vid,likedvids}) => {
         setWatchLaterdvids(response.data.watchlater);
         
         
+        
 
       },
       (error)=>{
         console.log(error); 
         setdisabled(false)
+        navigate('/login')
       })
 
     }else{
@@ -98,6 +105,7 @@ const VideoCard = ({vid,likedvids}) => {
       (error)=>{
         setdisabled(false)
         console.log(error); 
+        navigate('/login')
       })
     }
     
