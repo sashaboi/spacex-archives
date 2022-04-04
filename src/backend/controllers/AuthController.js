@@ -38,6 +38,7 @@ export const signupHandler = function (schema, request) {
       likes: [],
       history: [],
       playlists: [],
+      watchlater: [],
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign({ _id, email }, process.env.REACT_APP_JWT_SECRET);
@@ -75,9 +76,10 @@ export const loginHandler = function (schema, request) {
         { _id: foundUser._id, email },
         process.env.REACT_APP_JWT_SECRET
       );
+      console.log(encodedToken);
       foundUser.password = undefined;
       return new Response(200, {}, { foundUser, encodedToken });
-    }else
+    }
     return new Response(
       401,
       {},

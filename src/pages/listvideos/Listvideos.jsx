@@ -9,9 +9,11 @@ import VideoCard from '../../components/video-card/VideoCard';
 import Navbar from '../../components/navbar/Navbar';
 import './listvideos.css'
 import { useLike } from '../../context/LikesContext';
+import { useWatchLater } from '../../context/WatchLaterContext';
 const Listvideos = () => {
 
 const { likedvids ,setlocalvideos, state,dispatch} = useLike();
+const {WatchLatervids } = useWatchLater();
   useEffect(()=>{
     console.log("useeffect running");
     axios.get('/api/videos')
@@ -51,10 +53,15 @@ const { likedvids ,setlocalvideos, state,dispatch} = useLike();
         
           </div>
           <div className="video-listing">
-            <div className='grid-title'>VIDEOS</div>
+            <div className='video-listing-top-bar'>
+              <div className='grid-title'>VIDEOS</div>
+              <div className="category-listing">
+                Categories
+              </div>
+            </div>
             <div className="hr-div-long"></div>
             <div className="video-card-container">
-              {state.map((vid)=><VideoCard key={vid._id} vid = {vid} likedvids ={likedvids}/>)}
+              {state.map((vid)=><VideoCard key={vid._id} vid = {vid} likedvids ={likedvids} WatchLatervids = {WatchLatervids}/>)}
             </div>
           </div>
         </div>

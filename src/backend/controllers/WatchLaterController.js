@@ -2,17 +2,17 @@ import { Response } from "miragejs";
 import { requiresAuth } from "../utils/authUtils";
 
 /**
- * All the routes related to Liked Videos are present here.
+ * All the routes related to Watch Later Videos are present here.
  * These are private routes.
  * Client needs to add "authorization" header with JWT token in it to access it.
  * */
 
 /**
- * This handler handles getting videos from user's likes.
- * send GET Request at /api/user/likes
+ * This handler handles getting videos from user's watchlater playlist.
+ * send GET Request at /api/user/watchlater
  * */
 
-export const getLikedVideosHandler = function (schema, request) {
+export const getWatchLaterVideosHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -24,7 +24,7 @@ export const getLikedVideosHandler = function (schema, request) {
         }
       );
     }
-    return new Response(200, {}, { likes: user.likes });
+    return new Response(200, {}, { watchlater: user.watchlater });
   } catch (error) {
     return new Response(
       500,
@@ -37,26 +37,26 @@ export const getLikedVideosHandler = function (schema, request) {
 };
 
 /**
- * This handler handles adding videos to user's likes.
- * send POST Request at /api/user/likes
+ * This handler handles adding videos to user's watchlater playlist.
+ * send POST Request at /api/user/watchlater
  * body contains {video}
  * */
 
-export const addItemToLikedVideos = function (schema, request) {
+export const addItemToWatchLaterVideos = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const { video } = JSON.parse(request.requestBody);
-    if (user.likes.some((item) => item.id === video.id)) {
+    if (user.watchlater.some((item) => item.id === video.id)) {
       return new Response(
         409,
         {},
         {
-          errors: ["The video is already in your liked videos"],
+          errors: ["The video is already in your watch later videos"],
         }
       );
     }
-    user.likes.push(video);
-    return new Response(201, {}, { likes: user.likes });
+    user.watchlater.push(video);
+    return new Response(201, {}, { watchlater: user.watchlater });
   }
   return new Response(
     404,
@@ -68,18 +68,19 @@ export const addItemToLikedVideos = function (schema, request) {
 };
 
 /**
- * This handler handles removing videos from user's likes.
- * send DELETE Request at /api/user/likes/:videoId
+ * This handler handles removing videos from user's watchlater playlist.
+ * send DELETE Request at /api/user/watchlater/:videoId
  * */
 
-export const removeItemFromLikedVideos = function (schema, request) {
+export const removeItemFromWatchLaterVideos = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const videoId = request.params.videoId;
-    console.log(videoId);
-    const filteredLikes = user.likes.filter((item) => item._id !== videoId);
-    this.db.users.update({ likes: filteredLikes });
-    return new Response(200, {}, { likes: filteredLikes });
+    const filteredVideos = user.watchlater.filter(
+      (item) => item._id !== videoId
+    );
+    this.db.users.update({ watchlater: filteredVideos });
+    return new Response(200, {}, { watchlater: filteredVideos });
   }
   return new Response(
     404,
