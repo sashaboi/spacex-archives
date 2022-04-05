@@ -3,6 +3,7 @@ import axios from 'axios'
 // eslint-disable-next-line no-unused-vars
 import { children } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const PlaylistContext = createContext();
 
 const PlaylistProvider = ({children}) =>{
@@ -16,6 +17,7 @@ const PlaylistProvider = ({children}) =>{
     const header = {
     authorization: token
     } 
+    const navigate = useNavigate();
     useEffect(()=>{
         
         axios.get('/api/user/playlists',{headers : header})
@@ -23,6 +25,7 @@ const PlaylistProvider = ({children}) =>{
        
         setlocalplaylists(response.data.playlists)
         },(error)=>{
+            navigate('/login')
         console.log("error from get playlist api",error);
         })
     // eslint-disable-next-line react-hooks/exhaustive-deps

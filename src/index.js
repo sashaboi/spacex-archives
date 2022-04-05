@@ -13,17 +13,19 @@ makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
+    <Router>
     <AlertProvider>
     <PlaylistProvider>
     <WatchLaterProvider>
       <LikeProvider>
-        <Router>
+        
           <App />
-        </Router>
+        
       </LikeProvider>
     </WatchLaterProvider>
     </PlaylistProvider>
     </AlertProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
