@@ -5,9 +5,11 @@ import { useNavigate  } from 'react-router-dom'
 
 
 import Navbar from '../../../components/navbar/Navbar'
-
+import Alert from '../../../components/alert/Alert'
+import { useAlert } from '../../../context/Alertcontext'
 const Signup = () => {
   let navigate = useNavigate();
+  const {showalert,alertstatus,alertmessage} = useAlert();
   const [email , setemail ] = useState("onkarcool123@gmail.com")
   const [password , setpassword ] = useState("OnkarDeshpande")
   const [disabled , setdisabled] = useState(false)
@@ -24,17 +26,20 @@ const Signup = () => {
     axios.post('/api/auth/signup',bodydata)
     .then((response)=>{
       localStorage.setItem('token',response.data.encodedToken)
-      console.log('signed up successfully');
+      
+      showalert("Signed up successfully")
       navigate('/Listvideos')
     },
     (error)=>{
-      console.log('error from signup');
+      console.log('error from signup')
+      showalert('Error from signup');
     })
   }
 
   return (
     <div>
       <Navbar pagetype="not-home"/>
+      { alertstatus && <Alert message={alertmessage}/>}
     <div className='auth-parent'>
       <div className='auth-container'>
         <div className='login-title-section'>

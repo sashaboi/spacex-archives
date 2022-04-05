@@ -10,12 +10,17 @@ import Navbar from '../../components/navbar/Navbar';
 import './listvideos.css'
 import { useLike } from '../../context/LikesContext';
 import { useWatchLater } from '../../context/WatchLaterContext';
+import Modal from '../../components/modal/Modal';
+import { usePlaylist } from '../../context/PlaylistContext';
+import Alert from '../../components/alert/Alert';
+import { useAlert } from '../../context/Alertcontext';
 const Listvideos = () => {
-
-const { likedvids ,setlocalvideos, state,dispatch} = useLike();
-const {WatchLatervids } = useWatchLater();
+  const {alertstatus,alertmessage } =useAlert();
+  const {modalshow , setmodalshow} =usePlaylist();
+  const { likedvids ,setlocalvideos, state,dispatch} = useLike();
+  const {WatchLatervids } = useWatchLater();
   useEffect(()=>{
-    console.log("useeffect running");
+  
     axios.get('/api/videos')
     .then((response)=>{
       setlocalvideos(response.data.videos);
@@ -30,7 +35,10 @@ const {WatchLatervids } = useWatchLater();
 
   return (
     <div className='video-list-parent' >
+      
       <Navbar pagetype="not-home"/>
+      { alertstatus && <Alert message={alertmessage}/>}
+      { modalshow && <Modal closefunc={(modalshow)=>setmodalshow(modalshow)}/>}
       
       <div className="inner-container">
         
@@ -47,6 +55,7 @@ const {WatchLatervids } = useWatchLater();
               <Link to="/watchlater"><div className="menu-list-btn">Watch Later</div></Link>
               <Link to="/likedvideos"><div className="menu-list-btn">Liked Videos</div></Link>
               <Link to="/watchhistory"><div className="menu-list-btn">History</div></Link>
+              
               
             </div>
             

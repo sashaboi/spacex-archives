@@ -1,0 +1,48 @@
+.playlist-main-card{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 300px;
+    justify-content: space-between;
+    padding-bottom: 0.2rem;
+    background-color: rgba(128, 128, 128,0.4);
+    padding: 1rem;
+    border: black 1px solid;
+    margin: .2rem;
+}
+
+.playlist-card-title{
+    font-size: 2rem;
+    text-decoration: underline;
+    padding: 0.5rem;
+
+}
+.playlist-card-title:hover{
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    
+    border-radius: 1rem;
+
+
+}
+
+.playlist-card-video-count{
+    font-size: 2rem;
+    color: white;
+    background-color: black;
+    padding: 0.5rem;
+}
+.delete-playlist{
+    padding: 1rem;
+    background-color: grey;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.delete-playlist:hover{
+    background-color: rgb(32, 32, 32);
+    color: white;
+    cursor: pointer;
+}

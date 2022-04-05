@@ -9,13 +9,16 @@ import {HiViewList} from 'react-icons/hi';
 import { useLike } from '../../context/LikesContext';
 import { useWatchLater } from '../../context/WatchLaterContext';
 import { useState } from 'react';
-
+import { usePlaylist } from '../../context/PlaylistContext';
+import { useAlert } from '../../context/Alertcontext';
 import './videocard.css'
-const VideoCard = ({vid,likedvids}) => {
+
+const VideoCard = ({vid}) => {
   let navigate = useNavigate();
   const [disabled , setdisabled]=useState(false)
-  
-  const {dispatch,setlikedvids} = useLike();
+  const {setselectedvideo , setmodalshow}=usePlaylist();
+  const {showalert} = useAlert();  
+  const {dispatch,setlikedvids ,likedvids} = useLike();
   const { setWatchLaterdvids ,watchlatervids } = useWatchLater();
   
   if(likedvids.some((likedvidobj)=> likedvidobj._id===vid._id)){
@@ -46,8 +49,8 @@ const VideoCard = ({vid,likedvids}) => {
         setdisabled(false)
         dispatch({type:"unlike",payload:vid._id})
         setlikedvids(response.data.likes);
-        console.log(response.data.likes);
         
+        showalert("Video Unliked!")
 
       },
       (error)=>{
@@ -62,6 +65,7 @@ const VideoCard = ({vid,likedvids}) => {
         setdisabled(false)
         dispatch({type:"like",payload:vid._id})
         setlikedvids(response.data.likes);
+        showalert("Video Liked!")
       },
       (error)=>{
         setdisabled(false)
@@ -82,9 +86,9 @@ const VideoCard = ({vid,likedvids}) => {
       axios.delete(urltosend,{headers : header})
       .then((response)=>{
         setdisabled(false)
-        console.log('removed from wishlist');
+        console.log('removed from watchlater');
         setWatchLaterdvids(response.data.watchlater);
-        
+        showalert("Removed from watchlater")
         
         
 
@@ -99,8 +103,9 @@ const VideoCard = ({vid,likedvids}) => {
       axios.post('/api/user/watchlater',watchvideodata,{headers : header})
       .then((response)=>{
         setdisabled(false)
-        console.log('added to wishlist');
+        
         setWatchLaterdvids(response.data.watchlater);
+        showalert("Added to watchlater")
       },
       (error)=>{
         setdisabled(false)
@@ -110,6 +115,14 @@ const VideoCard = ({vid,likedvids}) => {
     }
     
     
+  }
+
+  const playlistClickHandler = (vid)=> {
+    setmodalshow(true)
+    
+    setselectedvideo(vid)
+    
+
   }
   const youtubelink = "http://i.ytimg.com/vi/"+vid._id+"/maxresdefault.jpg"
     
@@ -134,7 +147,7 @@ const VideoCard = ({vid,likedvids}) => {
 
           </button>
           
-          <div className="playlist action-btn">
+          <div onClick={()=>playlistClickHandler(vid)} className="playlist action-btn">
             <HiViewList/>
           </div>
         </div>
