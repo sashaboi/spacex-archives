@@ -1,0 +1,9 @@
+.empty-list img{
+    width: 500px;
+}
+.empty-list{
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+    gap: 1rem;
+}

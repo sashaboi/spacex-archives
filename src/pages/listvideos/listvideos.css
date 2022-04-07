@@ -74,3 +74,29 @@
     justify-content: space-between;
     gap: 2rem;
 }
+.category-listing{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+.category-listing-text{
+    background-color: black;
+    padding: 0.5rem 1rem;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid black;
+}
+.category-listing-text:hover{
+    cursor: pointer;
+    background-color: white;
+    
+    color: black;
+}
+.reset-categories:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

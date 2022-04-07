@@ -8,7 +8,7 @@ const AlertProvider = ({children}) =>{
     const [alertstatus,setalertstatus]=useState(false)
     const [alertmessage , setalertmessage] = useState("Sample Alert message")
     const showalert = (messageforalert) =>{
-        
+        console.log('alert is called');
         setalertmessage(messageforalert)
         setalertstatus(true)
         setTimeout(() => {

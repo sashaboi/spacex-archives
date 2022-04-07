@@ -1,12 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 import { useEffect  } from 'react';
-import { Link } from "react-router-dom";
 
 
 
 import VideoCard from '../../components/video-card/VideoCard';
 import Navbar from '../../components/navbar/Navbar';
+import Sidebar from '../../components/sidebar/Sidebar';
 import './listvideos.css'
 import { useLike } from '../../context/LikesContext';
 import { useWatchLater } from '../../context/WatchLaterContext';
@@ -14,25 +14,40 @@ import Modal from '../../components/modal/Modal';
 import { usePlaylist } from '../../context/PlaylistContext';
 import Alert from '../../components/alert/Alert';
 import { useAlert } from '../../context/Alertcontext';
+import { useCategories } from '../../context/CategoryContext';
+
 const Listvideos = () => {
-  const {alertstatus,alertmessage } =useAlert();
-  const {modalshow , setmodalshow} =usePlaylist();
-  const { likedvids ,setlocalvideos, state,dispatch} = useLike();
-  const {WatchLatervids } = useWatchLater();
   useEffect(()=>{
-  
+    
     axios.get('/api/videos')
     .then((response)=>{
       setlocalvideos(response.data.videos);
-      dispatch({type:"setvids",payload:response.data.videos})
+      setbackupvideos(response.data.videos);
+      
     },
     (error)=>{
-      console.log(error); 
+      showalert("Error in getting videos")
+      
     })
+   
     
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+  const {alertstatus,alertmessage ,showalert} =useAlert();
+  const {modalshow , setmodalshow} =usePlaylist();
+  const { likedvids ,setlocalvideos, localvideos,backupvideos,setbackupvideos} = useLike();
+  const {WatchLatervids } = useWatchLater();
+  const {localcategories} = useCategories();
+  
+  
+  const resetCategories = () =>{
+    setlocalvideos(backupvideos)
+  }
+  const setCategory = (cat) =>{
+    console.log(cat);
+    setlocalvideos(backupvideos.filter((obj)=>obj.category ===cat))
+  }
 
   return (
     <div className='video-list-parent' >
@@ -46,32 +61,19 @@ const Listvideos = () => {
       
         <div className="video-container">
           <div className="menu-sidebar">
-            <div className="grid-title">
-            MENU
-            </div>
-            <div className="hr-div-short"></div>
-            <div className="menu-item-container">
-              <Link to="/listvideos"><div className="menu-list-btn">Browse videos</div></Link>
-              <Link to="/playlists"><div className="menu-list-btn">Playlist</div></Link>
-              <Link to="/watchlater"><div className="menu-list-btn">Watch Later</div></Link>
-              <Link to="/likedvideos"><div className="menu-list-btn">Liked Videos</div></Link>
-              <Link to="/watchhistory"><div className="menu-list-btn">History</div></Link>
-              
-              
-            </div>
-            
-        
+            <Sidebar />
           </div>
           <div className="video-listing">
             <div className='video-listing-top-bar'>
               <div className='grid-title'>VIDEOS</div>
               <div className="category-listing">
-                Categories
+                {localcategories.map((cat)=><p key={cat._id} onClick={()=>setCategory(cat.categoryName)} className='category-listing-text'>{cat.categoryName}</p>)}
+                <p onClick={()=>resetCategories()} className='reset-categories'> Reset Categories </p>
               </div>
             </div>
             <div className="hr-div-long"></div>
             <div className="video-card-container">
-              {state.map((vid)=><VideoCard key={vid._id} vid = {vid} likedvids ={likedvids} WatchLatervids = {WatchLatervids}/>)}
+              {localvideos.map((vid)=><VideoCard key={vid._id} vid = {vid} likedvids ={likedvids} WatchLatervids = {WatchLatervids}/>)}
             </div>
           </div>
         </div>

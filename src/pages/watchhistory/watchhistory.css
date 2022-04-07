@@ -1,0 +1,24 @@
+.remove-from-history-vid-container{
+    display: flex;
+    gap:2rem;
+    flex-direction: column;
+    align-items: center;
+}
+.history-bin-handler{
+    font-size: 3rem;
+}
+.history-bin-handler:hover{
+    color: rgb(198, 0, 0);
+    cursor: pointer;
+}
+.history-subtitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.5rem;
+    gap: 0.2rem;
+}
+.history-subtitle:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import EmptyState from '../../components/emptystate/EmptyState';
 
 
 
@@ -21,7 +22,7 @@ const Watchlater = () => {
             <div className="hr-div-long"></div>
       </div>
       <div className="liked-vids-section">
-      {watchlatervids.map((mapvid)=><VideoCard key={mapvid._id}  vid={mapvid} likedvids ={likedvids}/>)}
+      {watchlatervids.length === 0?<EmptyState/>:watchlatervids.map((mapvid)=><VideoCard key={mapvid._id}  vid={mapvid} likedvids ={likedvids}/>)}
     
       </div>
       </div>
