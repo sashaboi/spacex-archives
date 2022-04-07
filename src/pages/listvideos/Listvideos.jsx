@@ -15,6 +15,7 @@ import { usePlaylist } from '../../context/PlaylistContext';
 import Alert from '../../components/alert/Alert';
 import { useAlert } from '../../context/Alertcontext';
 import { useCategories } from '../../context/CategoryContext';
+import {BiSearch} from "react-icons/bi";
 
 const Listvideos = () => {
   useEffect(()=>{
@@ -48,6 +49,9 @@ const Listvideos = () => {
     console.log(cat);
     setlocalvideos(backupvideos.filter((obj)=>obj.category ===cat))
   }
+  const videoSearch = (searchkey) =>{
+    setlocalvideos(backupvideos.filter((obj)=>obj.title.toUpperCase().includes(searchkey.toUpperCase())))
+  }
 
   return (
     <div className='video-list-parent' >
@@ -69,6 +73,10 @@ const Listvideos = () => {
               <div className="category-listing">
                 {localcategories.map((cat)=><p key={cat._id} onClick={()=>setCategory(cat.categoryName)} className='category-listing-text'>{cat.categoryName}</p>)}
                 <p onClick={()=>resetCategories()} className='reset-categories'> Reset Categories </p>
+              </div>
+              <div className="search-videos">
+                <div className='search-icon-videos'><BiSearch/></div>
+                <input onChange={(e)=>videoSearch(e.target.value)} type="text" placeholder='search for videos..' />
               </div>
             </div>
             <div className="hr-div-long"></div>
