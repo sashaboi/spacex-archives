@@ -1,3 +1,14 @@
-## Video Library Backend
+## Video Library : SpaceX Video Archive Frontend <br>
+ <br>
+This project is a video library app themed around being a video archive service for spacex. <br>
+Features : <br> <br>
 
-This folder contains the Mock Backend created for Video Library App. It contains different API end-points and database configuration for building Video Library; so that you can focus on building Frontend.
+Authentication (Login, Signup, Logout) <br>
+Home Page  <br>
+Video Listing Page <br>
+Playlist management <br>
+Like/Dislike Feature <br>
+Add to watch later <br>
+Watched History <br>
+Single Video Page (P1) <br>
+Filter videos with categories (P1) <br>
