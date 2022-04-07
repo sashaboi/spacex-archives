@@ -12,3 +12,4 @@ Add to watch later <br>
 Watched History <br>
 Single Video Page (P1) <br>
 Filter videos with categories (P1) <br>
+Search Video (P1) <br>
