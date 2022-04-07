@@ -10,7 +10,9 @@ import Watchlater from './pages/watchlater/Watchlater'
 import Login from './pages/auth/login/Login'
 import Signup from './pages/auth/signup/Signup'
 import Mockman from "mockman-js";
-
+import Singlevideo from "./pages/singlevideo/Singlevideo";
+import SinglePlaylist from "./pages/singleplaylist/SinglePlaylist";
+import Alert from "./components/alert/Alert";
 function App() {
   return (
     <div className="App">
@@ -25,6 +27,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/mockman" element={<Mockman />} />
+        <Route path="/alert" element={<Alert />} />
+        {/* <Route path="/singlevideo" element={<Singlevideo />} /> */}
+        <Route path="/singlevideo/:id" element={<Singlevideo />} />
+        <Route path="/singleplaylist/:id" element={<SinglePlaylist />} />
         
       </Routes>
     </div>

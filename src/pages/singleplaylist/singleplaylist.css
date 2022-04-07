@@ -1,0 +1,11 @@
+.single-playlist-page-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+}
+.playlist-title{
+    display: flex;
+    align-items: center;
+    flex-direction:column
+}
