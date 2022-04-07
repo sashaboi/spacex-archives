@@ -123,9 +123,14 @@ const VideoCard = ({vid}) => {
   }
 
   const playlistClickHandler = (vid)=> {
-    setmodalshow(true)
+    if (token){
+      setmodalshow(true)
     
-    setselectedvideo(vid)
+      setselectedvideo(vid)
+    }else{
+      navigate('/login')
+    }
+    
     
 
   }

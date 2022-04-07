@@ -4,6 +4,28 @@
     justify-content: center;
     flex-direction: column;
 }
+.video-listing-top-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+.search-videos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+.search-videos input{
+    width: 200px;
+    padding: 0.5rem 2rem;
+}
+.search-icon-videos{
+    margin-right: -2rem;
+    margin-top: 0.2rem;
+    z-index: 1;
+}
 .video-container{
     display: grid;
     grid-template-columns: 1fr 4fr;
