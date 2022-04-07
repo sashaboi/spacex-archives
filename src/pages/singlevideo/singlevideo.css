@@ -1,0 +1,8 @@
+.single-video-container{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 20px;
+    align-items: start;
+    padding-top: 2rem;
+    padding: 3rem;
+}

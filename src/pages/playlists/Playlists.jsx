@@ -9,6 +9,7 @@ import Navbar from '../../components/navbar/Navbar';
 import { usePlaylist } from '../../context/PlaylistContext';
 import { useAlert } from '../../context/Alertcontext';
 import './playlists.css'
+import EmptyState from '../../components/emptystate/EmptyState';
 const Playlists = () => {
   const {alertstatus,alertmessage } =useAlert();
 
@@ -38,8 +39,7 @@ const Playlists = () => {
               Delete 
             </div>
           </div>
-          
-            {localplaylists.map((playlist)=><div className='playlist-card-renderer'><Playlistcard playlist={playlist}/>deletebutton</div>)}
+            {localplaylists.length === 0 ? <EmptyState/>:localplaylists.map((playlist)=><div className='playlist-card-renderer'><Playlistcard playlist={playlist}/></div>)}
           </div>
         </div>
     

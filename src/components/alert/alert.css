@@ -30,5 +30,6 @@
     align-items: center;
     flex-direction: row;
     justify-content: center;
+    z-index: 999;
 
 }

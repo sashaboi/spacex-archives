@@ -8,6 +8,7 @@ import { usePlaylist } from '../../context/PlaylistContext';
 import './singleplaylist.css'
 import Alert from '../../components/alert/Alert';
 import { useAlert } from '../../context/Alertcontext';
+import EmptyState from '../../components/emptystate/EmptyState';
 
 const SinglePlaylist = () => {
     const {alertstatus,alertmessage } =useAlert();
@@ -36,12 +37,12 @@ const SinglePlaylist = () => {
                 <div className="hr-div-long"></div> 
             </div>  
             <div className="playlist-title">
-            <h1>{thisplaylist.title}</h1>
-            <p>{thisplaylist.description}</p>
+            <h1>Playlist Name :{thisplaylist.title}</h1>
+            
             </div>      
             <div className="playlist-video-listing-section">
                 Videos in playlist :<br/>
-                {thisplaylist.videos.length && thisplaylist.videos.map((vid)=><VideoCardforPlaylist thisplaylist={thisplaylist} vid= {vid} />)}
+                {thisplaylist.videos.length===0?<EmptyState/>:thisplaylist.videos.map((vid)=><VideoCardforPlaylist thisplaylist={thisplaylist} vid= {vid} />)}
             </div>
              
         </div>

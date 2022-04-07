@@ -19,6 +19,7 @@ const PlaylistProvider = ({children}) =>{
     } 
     const navigate = useNavigate();
     useEffect(()=>{
+        if(token){
         
         axios.get('/api/user/playlists',{headers : header})
         .then((response)=>{
@@ -27,7 +28,7 @@ const PlaylistProvider = ({children}) =>{
         },(error)=>{
             navigate('/login')
         console.log("error from get playlist api",error);
-        })
+        })}
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 

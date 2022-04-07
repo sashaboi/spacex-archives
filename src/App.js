@@ -13,10 +13,12 @@ import Mockman from "mockman-js";
 import Singlevideo from "./pages/singlevideo/Singlevideo";
 import SinglePlaylist from "./pages/singleplaylist/SinglePlaylist";
 import Alert from "./components/alert/Alert";
+import LostPage from "./pages/lostpage/LostPage";
 function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="*" element={<LostPage />} />
         <Route path="/" element={<Homepage />} />
         <Route path="/Listvideos" element={<Listvideos />} />
         <Route path="/likedvideos" element={<Likedvideos />} />

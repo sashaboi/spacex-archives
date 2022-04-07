@@ -11,6 +11,7 @@ import { useWatchLater } from '../../context/WatchLaterContext';
 import { useState } from 'react';
 import { usePlaylist } from '../../context/PlaylistContext';
 import { useAlert } from '../../context/Alertcontext';
+import { useHistory } from '../../context/Historycontext';
 import './videocard.css'
 
 const VideoCard = ({vid}) => {
@@ -18,8 +19,9 @@ const VideoCard = ({vid}) => {
   const [disabled , setdisabled]=useState(false)
   const {setselectedvideo , setmodalshow}=usePlaylist();
   const {showalert} = useAlert();  
-  const {dispatch,setlikedvids ,likedvids} = useLike();
+  const {setlikedvids ,likedvids} = useLike();
   const { setWatchLaterdvids ,watchlatervids } = useWatchLater();
+  const {setlocalhistory,localhistory} =useHistory();
   
   if(likedvids.some((likedvidobj)=> likedvidobj._id===vid._id)){
     var liketoggle = true
@@ -31,12 +33,12 @@ const VideoCard = ({vid}) => {
   }
   
   // var token = localStorage.getItem('token');
-  var token = localStorage.getItem('token')
+  const token = localStorage.getItem('token')
   const header = {
   authorization: token
-  }    
-
-   
+  }     
+  
+  console.log(token); 
   const likeHandler = (vid) => {
     setdisabled(true)
     const videodata = {
@@ -47,7 +49,7 @@ const VideoCard = ({vid}) => {
       axios.delete(urltosend,{headers : header})
       .then((response)=>{
         setdisabled(false)
-        dispatch({type:"unlike",payload:vid._id})
+        
         setlikedvids(response.data.likes);
         
         showalert("Video Unliked!")
@@ -63,7 +65,7 @@ const VideoCard = ({vid}) => {
       axios.post('/api/user/likes',videodata,{headers : header})
       .then((response)=>{
         setdisabled(false)
-        dispatch({type:"like",payload:vid._id})
+        
         setlikedvids(response.data.likes);
         showalert("Video Liked!")
       },
@@ -124,13 +126,41 @@ const VideoCard = ({vid}) => {
     
 
   }
+  const watchVideo = (vid) =>{
+    const videotoaddtohistory = {
+      "video":vid
+    }
+    if(localhistory.some((historyvid)=>historyvid._id===vid._id)){
+      setlocalhistory(localhistory.sort(function(x,y){return x === vid ? -1 :y === vid ?1:0;}))
+      
+    }else{
+      axios.post('/api/user/history',videotoaddtohistory,{headers : header})
+      .then((response)=>{
+        console.log(response);
+        showalert("Added video to history")
+        setlocalhistory(response.data.history)
+        
+      },
+      (error)=>{
+        navigate('/login')
+        console.log(error);
+        showalert("Please login")
+        
+      })
+
+    }
+    
+    
+    const urltonavigateto = '/singlevideo/' + vid._id
+    navigate(urltonavigateto)
+  }
   const youtubelink = "http://i.ytimg.com/vi/"+vid._id+"/maxresdefault.jpg"
     
   return (
     <div className='video-card-parent'>
-        <img src={youtubelink} alt="" />
+        <img onClick={()=>watchVideo(vid)} src={youtubelink} alt="" className='thumbnail' />
         <div className="video-desc-container">
-          <div className="vid-title">
+          <div onClick={()=>watchVideo(vid)} className="vid-title">
           {vid.title}
           </div>
           

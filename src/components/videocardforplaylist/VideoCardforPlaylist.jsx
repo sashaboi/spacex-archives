@@ -1,12 +1,14 @@
 import React from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 import { usePlaylist } from '../../context/PlaylistContext';
 import { BsFillTrashFill } from "react-icons/bs";
 import './videocardforplaylist.css'
 import { useAlert } from '../../context/Alertcontext';
+
 const VideoCardforPlaylist = ({vid,thisplaylist}) => {
-    
+    const navigate = useNavigate();
     const {setlocalplaylists}=usePlaylist();
     const {showalert} =useAlert();
     const youtubelink = "http://i.ytimg.com/vi/"+vid._id+"/maxresdefault.jpg"
@@ -26,9 +28,13 @@ const VideoCardforPlaylist = ({vid,thisplaylist}) => {
         console.log("error from remove video from playlist api",error);
         })
     }
+    const goToVideo =(vid)=>{
+        const urltonavigateto = '/singlevideo/' + vid
+        navigate(urltonavigateto)
+    }
     return (
         <div className='video-card-for-playlist-parent'>
-            <div className="thumbnail">
+            <div onClick={()=>goToVideo(vid._id)} className="thumbnail">
                 <img src={youtubelink} alt={vid.title} />
             </div>
             <div className="video-details-for-playlist">

@@ -16,8 +16,7 @@ const Modal = (props) => {
         return null
     }
     const datatosend = {
-        "playlist":{title:playlistinput,description:"playlist description"}
-        
+        "playlist":{title:playlistinput,description:"playlist description"}        
     }
     const createPlaylistHandler = () =>{
         axios.post('/api/user/playlists',datatosend,{headers : header})
@@ -65,8 +64,8 @@ const Modal = (props) => {
                         Listing all playlists
                     </div>
                     <div className="listing-playlist-container">
-                        {localplaylists.length && localplaylists.slice(0,3).map((playlistobj)=><div className='horiplaylist-parent'>{playlistobj.title}<button onClick={()=>addVideoToPlaylist(playlistobj)}>ADD</button></div>)}
-                        <Link to="/playlists"><div className="simple-link-text">See all playlists</div></Link>
+                        {localplaylists.length===0?<h5>"No Playlists created"</h5> : localplaylists.slice(0,3).map((playlistobj)=><div className='horiplaylist-parent'>{playlistobj.title}<button onClick={()=>addVideoToPlaylist(playlistobj)}>ADD</button></div>)}
+                        {localplaylists.length!==0 ? <Link to="/playlists"><div className="simple-link-text">See all playlists</div></Link>:""}
                     </div>
                 </div>
             </div>

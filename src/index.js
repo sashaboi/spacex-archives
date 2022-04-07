@@ -8,6 +8,8 @@ import {LikeProvider} from './context/LikesContext';
 import {WatchLaterProvider} from './context/WatchLaterContext';
 import {PlaylistProvider} from './context/PlaylistContext'
 import {AlertProvider} from './context/Alertcontext'
+import {HistoryProvider} from './context/Historycontext'
+import {CategoryProvider} from './context/CategoryContext'
 // Call make Server
 makeServer();
 
@@ -16,12 +18,14 @@ ReactDOM.render(
     <Router>
     <AlertProvider>
     <PlaylistProvider>
-    <WatchLaterProvider>
-      <LikeProvider>
-        
+      <WatchLaterProvider>
+        <LikeProvider>
+        <HistoryProvider>
+        <CategoryProvider>
           <App />
-        
-      </LikeProvider>
+          </CategoryProvider>
+          </HistoryProvider>
+        </LikeProvider>
     </WatchLaterProvider>
     </PlaylistProvider>
     </AlertProvider>

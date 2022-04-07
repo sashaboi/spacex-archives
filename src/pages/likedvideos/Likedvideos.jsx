@@ -9,6 +9,7 @@ import { useWatchLater } from '../../context/WatchLaterContext';
 import './likedvideos.css'
 import Alert from '../../components/alert/Alert';
 import { useAlert } from '../../context/Alertcontext';
+import EmptyState from '../../components/emptystate/EmptyState';
 const Likedvideos = () => {
   const {likedvids} = useLike();
   const {alertstatus,alertmessage } =useAlert();
@@ -25,7 +26,7 @@ const Likedvideos = () => {
             <div className="hr-div-long"></div>
       </div>
       <div className="liked-vids-section">
-      {likedvids.map((likedvid)=><VideoCard key={likedvid._id} WatchLaterdvids={WatchLaterdvids} vid={likedvid} likedvids ={likedvids}/>)}
+        {likedvids.length === 0 ? <EmptyState/>:likedvids.map((likedvid)=><VideoCard key={likedvid._id} WatchLaterdvids={WatchLaterdvids} vid={likedvid} likedvids ={likedvids}/>)}
     
       </div>
       </div>
