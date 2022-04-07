@@ -22,9 +22,7 @@ const Singlevideo = () => {
         <div className="video-listing">
             <div className='video-listing-top-bar'>
               <div className='grid-title'>VIDEOS</div>
-              <div className="category-listing">
-                Categories
-              </div>
+              
             </div>
             <div className="hr-div-long"></div>
             <div className="video-card-container">

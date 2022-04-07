@@ -17,28 +17,29 @@ import { useAlert } from '../../context/Alertcontext';
 import { useCategories } from '../../context/CategoryContext';
 
 const Listvideos = () => {
-  const {alertstatus,alertmessage ,showalert} =useAlert();
-  const {modalshow , setmodalshow} =usePlaylist();
-  const { likedvids ,setlocalvideos, localvideos,backupvideos,setbackupvideos} = useLike();
-  const {WatchLatervids } = useWatchLater();
-  const {localcategories} = useCategories();
   useEffect(()=>{
     
     axios.get('/api/videos')
     .then((response)=>{
       setlocalvideos(response.data.videos);
       setbackupvideos(response.data.videos);
-      console.log(response);
+      
     },
     (error)=>{
       showalert("Error in getting videos")
-      console.log(error); 
+      
     })
    
     
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+  const {alertstatus,alertmessage ,showalert} =useAlert();
+  const {modalshow , setmodalshow} =usePlaylist();
+  const { likedvids ,setlocalvideos, localvideos,backupvideos,setbackupvideos} = useLike();
+  const {WatchLatervids } = useWatchLater();
+  const {localcategories} = useCategories();
+  
   
   const resetCategories = () =>{
     setlocalvideos(backupvideos)
@@ -66,7 +67,7 @@ const Listvideos = () => {
             <div className='video-listing-top-bar'>
               <div className='grid-title'>VIDEOS</div>
               <div className="category-listing">
-                {localcategories.map((cat)=><p onClick={()=>setCategory(cat.categoryName)} className='category-listing-text'>{cat.categoryName}</p>)}
+                {localcategories.map((cat)=><p key={cat._id} onClick={()=>setCategory(cat.categoryName)} className='category-listing-text'>{cat.categoryName}</p>)}
                 <p onClick={()=>resetCategories()} className='reset-categories'> Reset Categories </p>
               </div>
             </div>

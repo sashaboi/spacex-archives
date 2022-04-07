@@ -38,7 +38,6 @@ const VideoCard = ({vid}) => {
   authorization: token
   }     
   
-  console.log(token); 
   const likeHandler = (vid) => {
     setdisabled(true)
     const videodata = {
@@ -58,6 +57,7 @@ const VideoCard = ({vid}) => {
       (error)=>{
         console.log(error); 
         setdisabled(false)
+        showalert("Please Login / Signup")
         navigate('/login')
       })
 
@@ -72,6 +72,7 @@ const VideoCard = ({vid}) => {
       (error)=>{
         setdisabled(false)
         console.log(error); 
+        showalert("Please Login / Signup")
         navigate('/login')
       })
     }
@@ -98,6 +99,7 @@ const VideoCard = ({vid}) => {
       (error)=>{
         console.log(error); 
         setdisabled(false)
+        showalert("Please Login / Signup")
         navigate('/login')
       })
 
@@ -112,6 +114,7 @@ const VideoCard = ({vid}) => {
       (error)=>{
         setdisabled(false)
         console.log(error); 
+        showalert("Please Login / Signup")
         navigate('/login')
       })
     }
@@ -142,6 +145,7 @@ const VideoCard = ({vid}) => {
         
       },
       (error)=>{
+        
         navigate('/login')
         console.log(error);
         showalert("Please login")

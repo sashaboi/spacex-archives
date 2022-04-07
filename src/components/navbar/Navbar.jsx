@@ -9,7 +9,7 @@ const Navbar = ({pagetype}) => {
   var token = localStorage.getItem('token')
   const logoutclickhandler = () =>{
     localStorage.clear();
-    showalert("logged out successfully")
+    showalert("Logged out successfully")
     navigate('/')
   }
   const parentclass = 'navbar-parent ' +  pagetype
